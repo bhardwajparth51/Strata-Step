@@ -1,0 +1,30 @@
+{
+  "name": "vaultflow",
+  "version": "1.0.0",
+  "description": "VaultFlow — Durable Execution & Workflow Engine",
+  "type": "module",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "db:seed": "node dist/db/seed.js",
+    "test:unit": "node dist/test/unitStepLock.js",
+    "test:concurrency": "node dist/test/concurrencySimulation.js",
+    "test:replay": "node dist/test/replaySimulation.js",
+    "test:crash": "node dist/test/crashRecoverySimulation.js",
+    "test:idempotency": "node dist/test/idempotencySimulation.js",
+    "test:hardening": "node dist/test/testProductionHardening.js",
+    "test:prod-level": "node dist/test/testProductionLevelPhase1And2.js"
+  },
+  "dependencies": {
+    "drizzle-orm": "^0.30.0",
+    "pg": "^8.11.3",
+    "ioredis": "^5.3.2"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.0",
+    "@types/pg": "^8.11.0",
+    "drizzle-kit": "^0.20.14",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.3.3"
+  }
+}
