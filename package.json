@@ -13,7 +13,8 @@
     "test:crash": "node dist/test/crashRecoverySimulation.js",
     "test:idempotency": "node dist/test/idempotencySimulation.js",
     "test:hardening": "node dist/test/testProductionHardening.js",
-    "test:prod-level": "node dist/test/testProductionLevelPhase1And2.js"
+    "test:prod-level": "node dist/test/testProductionLevelPhase1And2.js",
+    "test:fault": "node dist/test/processKillFaultTest.js"
   },
   "dependencies": {
     "drizzle-orm": "^0.30.0",

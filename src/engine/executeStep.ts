@@ -163,6 +163,24 @@ export async function executeStep<TInput, TOutput>(
 
         const executionTimeMs = Date.now() - execStartTime;
 
+        // Second lock-loss guard — placed immediately before the DB commit.
+        //
+        // The first guard (above) catches losses that occurred during stepFn.
+        // This one catches the narrower window between stepFn returning and
+        // the transaction acquiring its DB connection.  The step_checkpoints
+        // composite PK (workflowRunId, stepName) is the final backstop if two
+        // workers race past both guards: the second writer's upsert will
+        // overwrite the checkpoint payload but cannot produce a duplicate row,
+        // so the worst outcome is last-writer-wins on the DB record — not
+        // corruption.  For side-effecting steps (e.g. a Stripe charge) the
+        // idempotency key on the external call is the correct guard, not this
+        // one, which is why the idempotencyKey is threaded into StepContext.
+        if (lockLost || abortController.signal.aborted) {
+          throw new LockLostError(
+            `Lock expired between stepFn completion and checkpoint commit for step '${stepName}'`
+          );
+        }
+
         const completedStep = await StepExecutionRepository.completeStepTransaction(
           runningStep.id,
           workflowRunId,
