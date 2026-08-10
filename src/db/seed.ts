@@ -2,7 +2,7 @@ import { db, pool } from './db.js';
 import { workflows, workflowRuns, stepExecutions } from './schema.js';
 
 async function seed() {
-  console.log('Seeding VaultFlow database...');
+  console.log('Seeding StratStep database...');
 
   try {
     // 1. Insert Workflow Definition

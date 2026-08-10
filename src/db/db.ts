@@ -3,7 +3,7 @@ import pkg from 'pg';
 const { Pool } = pkg;
 import * as schema from './schema.js';
 
-const connectionString = process.env.DATABASE_URL || 'postgres://vaultflow:vaultflow@localhost:5432/vaultflow';
+const connectionString = process.env.DATABASE_URL || 'postgres://stratstep:stratstep@localhost:5432/stratstep';
 
 export const pool = new Pool({
   connectionString,

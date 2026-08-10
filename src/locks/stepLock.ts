@@ -17,7 +17,7 @@ export class StepLock {
 
   constructor(redis: Redis, workflowRunId: string, stepName: string, ttlMs = 30000) {
     this.redis = redis;
-    this.key = `vaultflow:step-lock:${workflowRunId}:${stepName}`;
+    this.key = `stratstep:step-lock:${workflowRunId}:${stepName}`;
     this.value = randomUUID();
     this.ttlMs = ttlMs;
 

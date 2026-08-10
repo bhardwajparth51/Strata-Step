@@ -1,24 +1,24 @@
 services:
   postgres:
     image: postgres:16-alpine
-    container_name: vaultflow_postgres
+    container_name: stratstep_postgres
     environment:
-      POSTGRES_USER: vaultflow
-      POSTGRES_PASSWORD: vaultflow
-      POSTGRES_DB: vaultflow
+      POSTGRES_USER: stratstep
+      POSTGRES_PASSWORD: stratstep
+      POSTGRES_DB: stratstep
     ports:
       - "5432:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U vaultflow -d vaultflow"]
+      test: ["CMD-SHELL", "pg_isready -U stratstep -d stratstep"]
       interval: 5s
       timeout: 5s
       retries: 5
 
   redis:
     image: redis:7-alpine
-    container_name: vaultflow_redis
+    container_name: stratstep_redis
     ports:
       - "6379:6379"
     healthcheck:

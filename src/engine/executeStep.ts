@@ -136,7 +136,7 @@ export async function executeStep<TInput, TOutput>(
         throw new LockLostError(`Lock lost during execution of step '${stepName}'`);
       }
 
-      const idempotencyKey = `vaultflow:${workflowRunId}:${stepName}`;
+      const idempotencyKey = `stratstep:${workflowRunId}:${stepName}`;
       const runningStep = await StepExecutionRepository.createRunningStep({
         workflowRunId,
         stepName,

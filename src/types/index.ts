@@ -15,6 +15,7 @@ export enum StepExecutionStatus {
   COMPLETED = 'COMPLETED',
   FAILED = 'FAILED',
   SKIPPED = 'SKIPPED',
+  INVALIDATED = 'INVALIDATED',
 }
 
 export interface RetryPolicy {

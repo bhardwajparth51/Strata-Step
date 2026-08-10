@@ -4,7 +4,7 @@ import { StepLock } from '../locks/stepLock.js';
 import { StepExecutionRepository } from '../db/repositories/stepExecutionRepository.js';
 import { StepCheckpointRepository } from '../db/repositories/stepCheckpointRepository.js';
 import { WorkflowRunRepository } from '../db/repositories/workflowRunRepository.js';
-import { VaultFlowEngine } from '../engine/vaultflowEngine.js';
+import { StratStepEngine } from '../engine/stratstepEngine.js';
 import { db } from '../db/db.js';
 import { stepCheckpoints, workflowRuns } from '../db/schema.js';
 
@@ -39,7 +39,7 @@ class MockRedis {
 }
 
 async function runTests() {
-  console.log('Running VaultFlow production-level integration test suite...\n');
+  console.log('Running StratStep production-level integration test suite...\n');
 
   let mockExecutions: any[] = [];
   StepCheckpointRepository.findActiveCheckpoint = (async () => null) as any;
@@ -161,8 +161,8 @@ async function runTests() {
   assert.ok(runTableDef.schemaVersion);
   assert.ok(checkpointTableDef.workflowRunId);
 
-  // Test 4: VaultFlowEngine Facade
-  const engine = new VaultFlowEngine({ redis: mockRedis as any });
+  // Test 4: StratStepEngine Facade
+  const engine = new StratStepEngine({ redis: mockRedis as any });
   
   let facadeExecuted = false;
   await engine.executeStep({
@@ -236,7 +236,7 @@ async function runTests() {
   assert.strictEqual(nonRetryCaught, true);
   assert.strictEqual(nonRetryAttempts, 1);
 
-  console.log('VaultFlow Phase 1 & 2 production-level integration tests passed cleanly!\n');
+  console.log('StratStep Phase 1 & 2 production-level integration tests passed cleanly!\n');
 }
 
 runTests().catch((err) => {

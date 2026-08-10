@@ -40,7 +40,7 @@ class MockRedis {
 }
 
 async function runUnitTests() {
-  console.log('Running VaultFlow engine unit tests...\n');
+  console.log('Running StratStep engine unit tests...\n');
 
   // Test 1: StepLock Basic Acquire, Renew, and Release
   console.log('Test 1: StepLock acquire, renew, and release');
@@ -122,7 +122,7 @@ async function runUnitTests() {
   });
 
   assert.ok(capturedContext !== null, 'Context should be passed');
-  assert.strictEqual(capturedContext.idempotencyKey, 'vaultflow:run-100:chargeCustomerStripe', 'Idempotency key match');
+  assert.strictEqual(capturedContext.idempotencyKey, 'stratstep:run-100:chargeCustomerStripe', 'Idempotency key match');
   assert.ok(mockRedis2.renewCalls >= 3, `Heartbeat should renew multiple times (got ${mockRedis2.renewCalls})`);
   assert.strictEqual(result.outputPayload.chargeId, 'ch_123', 'Output payload match');
   console.log('PASS Test 2\n');
@@ -358,7 +358,7 @@ async function runUnitTests() {
   // Test 10: External Service Idempotency Key Failover Test
   console.log('Test 10: External Service Idempotency Key Failover Test');
   const stripeAdapter = new StripeAdapter();
-  const idempotencyKey = 'vaultflow:run-idemp-1:chargeCustomerStripe';
+  const idempotencyKey = 'stratstep:run-idemp-1:chargeCustomerStripe';
 
   const chargeA = await stripeAdapter.createCharge(4900, 'usd', idempotencyKey);
   assert.strictEqual(chargeA.reusedExistingCharge, false, 'First charge MUST execute new external call');
@@ -369,7 +369,7 @@ async function runUnitTests() {
   assert.strictEqual(stripeAdapter.externalChargeCount, 1, 'External charges on Stripe MUST equal 1');
   console.log('PASS Test 10\n');
 
-  console.log('All 10 VaultFlow engine unit tests passed cleanly!');
+  console.log('All 10 StratStep engine unit tests passed cleanly!');
 }
 
 runUnitTests().catch((err) => {

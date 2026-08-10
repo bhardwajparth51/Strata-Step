@@ -1,7 +1,7 @@
 {
-  "name": "vaultflow",
+  "name": "stratstep",
   "version": "1.0.0",
-  "description": "VaultFlow — Durable Execution & Workflow Engine",
+  "description": "StratStep — Durable Execution & Workflow Engine",
   "type": "module",
   "main": "dist/index.js",
   "scripts": {

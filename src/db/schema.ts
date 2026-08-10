@@ -15,6 +15,7 @@ export const stepExecutionStatusEnum = pgEnum('step_execution_status', [
   'COMPLETED',
   'FAILED',
   'SKIPPED',
+  'INVALIDATED',
 ]);
 
 export const workflows = pgTable('workflows', {
